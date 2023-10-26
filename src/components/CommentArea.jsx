@@ -1,7 +1,7 @@
 import { Component } from "react";
 import CommentList from "./CommentList";
 import AddComment from "./AddComment";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Alert } from "react-bootstrap";
 
 const authorizationKey =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNGU1MmY2ZTNkZDAwMTQ5NWU0MzYiLCJpYXQiOjE2OTgzMTk5NTQsImV4cCI6MTY5OTUyOTU1NH0._5f7a5FHV9rodonlw7xUBbjbAQ2k8EBEY3C8vROpRfQ";
@@ -13,6 +13,7 @@ class CommentArea extends Component {
     comments: [],
     bookId: this.props.bookId,
     spinnerState: false,
+    errorState: false,
   };
 
   getSingleBook = () => {
@@ -27,6 +28,7 @@ class CommentArea extends Component {
 
           return res.json();
         } else {
+          this.setState({ errorState: true });
           throw new Error("non è andata a buon fine");
         }
       })
@@ -55,6 +57,7 @@ class CommentArea extends Component {
         >
           <Spinner />
         </div>
+        {this.state.errorState && <Alert variant={"danger"}>Error </Alert>}
         <CommentList
           bookId={this.props.bookId}
           comments={this.state.comments}
