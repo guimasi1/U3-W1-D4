@@ -1,6 +1,7 @@
 import { Component } from "react";
 import CommentList from "./CommentList";
 import AddComment from "./AddComment";
+import { Spinner } from "react-bootstrap";
 
 const authorizationKey =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNGU1MmY2ZTNkZDAwMTQ5NWU0MzYiLCJpYXQiOjE2OTgzMTk5NTQsImV4cCI6MTY5OTUyOTU1NH0._5f7a5FHV9rodonlw7xUBbjbAQ2k8EBEY3C8vROpRfQ";
@@ -11,6 +12,7 @@ class CommentArea extends Component {
   state = {
     comments: [],
     bookId: this.props.bookId,
+    spinnerState: false,
   };
 
   getSingleBook = () => {
@@ -31,6 +33,7 @@ class CommentArea extends Component {
       .then((data) => {
         console.log(data);
         this.setState({ comments: data });
+        this.setState({ spinnerState: true });
         console.log(this.props.bookId);
       })
       .catch((err) => {
@@ -45,6 +48,13 @@ class CommentArea extends Component {
   render() {
     return (
       <div>
+        <div
+          className={`text-center ${
+            this.state.spinnerState ? "d-none" : "d-block"
+          }`}
+        >
+          <Spinner />
+        </div>
         <CommentList
           bookId={this.props.bookId}
           comments={this.state.comments}
