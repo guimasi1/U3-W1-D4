@@ -4,10 +4,13 @@ import SingleComment from "./SingleComment";
 
 class CommentList extends Component {
   render() {
+    console.log(this.props.comments);
     return (
+      // {console.log(this.props.comments)}
+
       <ListGroup>
         {this.props.comments.map((comment) => (
-          <SingleComment />
+          <SingleComment comment={comment} />
         ))}
       </ListGroup>
     );

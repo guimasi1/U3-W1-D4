@@ -22,7 +22,6 @@ class CommentArea extends Component {
       .then((res) => {
         if (res.ok) {
           console.log("è andata a buon fine");
-          console.log(this.props.bookId);
 
           return res.json();
         } else {
@@ -32,6 +31,7 @@ class CommentArea extends Component {
       .then((data) => {
         console.log(data);
         this.setState({ comments: data });
+        console.log(this.props.bookId);
       })
       .catch((err) => {
         console.log(err);
@@ -46,7 +46,7 @@ class CommentArea extends Component {
     return (
       <div>
         <CommentList comments={this.state.comments} />
-        <AddComment bookId={this.state.bookId} />
+        <AddComment bookId={this.props.bookId} />
       </div>
     );
   }

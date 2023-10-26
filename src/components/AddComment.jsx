@@ -11,12 +11,12 @@ class AddComment extends Component {
     singleComment: {
       comment: "",
       rate: "",
-      elementId: "",
+      elementId: this.props.bookId,
     },
   };
 
   addComment = () => {
-    fetch(urlToUse + this.props.bookId, {
+    fetch(urlToUse, {
       method: "POST",
       body: JSON.stringify(this.state.singleComment),
       headers: {
