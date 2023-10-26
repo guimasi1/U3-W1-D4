@@ -27,6 +27,7 @@ class AddComment extends Component {
       .then((res) => {
         if (res.ok) {
           console.log("ok");
+          window.location.reload();
         } else {
           throw new Error("not ok");
         }
